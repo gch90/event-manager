@@ -21,7 +21,6 @@ const createEvent = async (req, res) => {
 const getEvent = async (req, res) => {
   try {
     const { id: eventId } = req.params
-    console.log(eventId);
     const event = await Event.findOne({ _id: eventId })
   if(!event){
     return res.status(404).json({msg: 'No event with that id'})

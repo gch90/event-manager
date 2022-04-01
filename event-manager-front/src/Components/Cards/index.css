@@ -1,0 +1,12 @@
+.card {
+  text-align: center;
+  background-color: lightgrey;
+  max-width: 300px;
+  min-width: 250px;
+  border-radius: 10px;
+  box-shadow: 2px 2px rgba(136, 136, 136, 0.699);
+}
+
+.card:hover {
+  transform: scale(1.05);
+}

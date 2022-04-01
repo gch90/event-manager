@@ -1,23 +1,49 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
-
+import Card from './Components/Cards'
+import {getAllEvents, createEvent } from './Actions/Event'
+import Form from './Components/Form';
 
 function App() {
-  const [count, setCount] = useState(0);
 
-  // Similar to componentDidMount and componentDidUpdate:
+  const [list, setList] = useState()
+  const [res, setRes] = useState()
+
+  const formSubmit = (name, description, endDate, startDate) => {
+    async function generateEvent() {
+      const event = await createEvent(name, description, endDate, startDate);
+      // console.log(event);
+      setRes(event)
+    }
+    generateEvent();
+  }
+
   useEffect(() => {
-    // Update the document title using the browser API
-    document.title = `You clicked ${count} times`;
-  });
+    async function getEvents() {
+      const list = await getAllEvents();
+      setList(list)
+    }
+    getEvents();
+  }, [res]);
+
+  const displayList = () => {
+    if (!list) {
+      return <div>loading...</div>
+    }
+    return (
+      <div className='grid'>
+        {list.events.map( (event) => (
+          <Card event={event} />
+        ))}
+      </div>
+    )
+  }
 
   return (
     <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
+      < Form formSubmit={formSubmit} />
+      {displayList()}
+
     </div>
   );
 }
