@@ -5,12 +5,12 @@ const connectDB = require('./db/connect')
 require('dotenv').config()
 
 //middleware
-app.use(express.static('./public'))
+// app.use(express.static('./event-manager-front/build'))
 app.use(express.json())
 
 app.use('/api/v1/events',events)
 
-const port = 3000;
+const port = 8000;
 
 const start = async () => {
   try{

@@ -12,7 +12,7 @@ const getAllEvents = async (req, res) => {
 const createEvent = async (req, res) => {
   try {
     const event = await Event.create(req.body)
-    res.status(201).json({event})
+    res.status(201).json({ event })
   } catch (error) {
     res.status(500).json({msg: error})
   }
@@ -21,7 +21,8 @@ const createEvent = async (req, res) => {
 const getEvent = async (req, res) => {
   try {
     const { id: eventId } = req.params
-    const { event } = await Event.findOne({ _id: eventId })
+    console.log(eventId);
+    const event = await Event.findOne({ _id: eventId })
   if(!event){
     return res.status(404).json({msg: 'No event with that id'})
   }
